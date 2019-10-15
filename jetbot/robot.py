@@ -5,7 +5,7 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT
 from .motor import Motor
 
 
-class Robot(SingletonConfigurable):
+class Robot(SingletonConfigurable): #小车控制模块
     
     left_motor = traitlets.Instance(Motor)
     right_motor = traitlets.Instance(Motor)
@@ -13,7 +13,7 @@ class Robot(SingletonConfigurable):
     # config
     i2c_bus = traitlets.Integer(default_value=1).tag(config=True)
     left_motor_channel = traitlets.Integer(default_value=1).tag(config=True)
-    left_motor_alpha = traitlets.Float(default_value=1.0).tag(config=True)
+    left_motor_alpha = traitlets.Float(default_value=1.0).tag(config=True) #电机速度的权值
     right_motor_channel = traitlets.Integer(default_value=2).tag(config=True)
     right_motor_alpha = traitlets.Float(default_value=1.0).tag(config=True)
     
@@ -23,7 +23,7 @@ class Robot(SingletonConfigurable):
         self.left_motor = Motor(self.motor_driver, channel=self.left_motor_channel, alpha=self.left_motor_alpha)
         self.right_motor = Motor(self.motor_driver, channel=self.right_motor_channel, alpha=self.right_motor_alpha)
         
-    def set_motors(self, left_speed, right_speed):
+    def set_motors(self, left_speed, right_speed): #设置左右电机速度
         self.left_motor.value = left_speed
         self.right_motor.value = right_speed
         
