@@ -15,7 +15,7 @@ class Camera(SingletonConfigurable):
     height = traitlets.Integer(default_value=224).tag(config=True)
     fps = traitlets.Integer(default_value=21).tag(config=True)
     capture_width = traitlets.Integer(default_value=3280).tag(config=True)
-    capture_height = traitlets.Integer(default_value=2464).tag(config=True)
+    capture_height = traitlets.Integer(default_value=2464).tag(config=True) #宽高帧率
 
     def __init__(self, *args, **kwargs):
         self.value = np.empty((self.height, self.width, 3), dtype=np.uint8)
@@ -24,7 +24,7 @@ class Camera(SingletonConfigurable):
         try:
             self.cap = cv2.VideoCapture(self._gst_str(), cv2.CAP_GSTREAMER)
 
-            re, image = self.cap.read()
+            re, image = self.cap.read() #打开相机读取图片
 
             if not re:
                 raise RuntimeError('Could not read image from camera.')
