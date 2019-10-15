@@ -6,7 +6,7 @@ import time
 import threading
 
 
-class Heartbeat(Configurable):
+class Heartbeat(Configurable): #用于节点故障检测
     class Status(enum.Enum):
         dead = 0
         alive = 1
@@ -21,8 +21,8 @@ class Heartbeat(Configurable):
         super(Heartbeat, self).__init__(*args,
                                         **kwargs)  # initializes traitlets
 
-        self.pulseout = widgets.FloatText(value=time.time())
-        self.pulsein = widgets.FloatText(value=time.time())
+        self.pulseout = widgets.FloatText(value=time.time())#发出脉冲
+        self.pulsein = widgets.FloatText(value=time.time())#读取引脚脉冲
         self.link = widgets.jsdlink((self.pulseout, 'value'),
                                     (self.pulsein, 'value'))
         self.start()
