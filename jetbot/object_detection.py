@@ -18,7 +18,7 @@ def bgr8_to_ssd_input(camera_value):
     return x[None, ...]
 
 
-class ObjectDetector(object):
+class ObjectDetector(object): #基于tensorRT框架的目标检测
     
     def __init__(self, engine_path, preprocess_fn=bgr8_to_ssd_input):
         logger = trt.Logger()
