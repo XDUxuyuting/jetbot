@@ -10,7 +10,7 @@ class Motor(Configurable):
     
     # config
     alpha = traitlets.Float(default_value=1.0).tag(config=True)
-    beta = traitlets.Float(default_value=0.0).tag(config=True)
+    beta = traitlets.Float(default_value=0.0).tag(config=True) #设置两个浮点参数
 
     def __init__(self, driver, channel, *args, **kwargs):
         super(Motor, self).__init__(*args, **kwargs)  # initializes traitlets
@@ -23,7 +23,7 @@ class Motor(Configurable):
     def _observe_value(self, change):
         self._write_value(change['new'])
 
-    def _write_value(self, value):
+    def _write_value(self, value): #设置电机速度
         """Sets motor value between [-1, 1]"""
         mapped_value = int(255.0 * (self.alpha * value + self.beta))
         speed = min(max(abs(mapped_value), 0), 255)
