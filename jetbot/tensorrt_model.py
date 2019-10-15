@@ -2,7 +2,7 @@ import torch
 import tensorrt as trt
 import atexit
 
-
+#数据预处理
 def torch_dtype_to_trt(dtype):
     if dtype == torch.int8:
         return trt.int8
@@ -47,7 +47,7 @@ def torch_device_from_trt(device):
         return TypeError('%s is not supported by torch' % device)
 
     
-class TRTModel(object):
+class TRTModel(object): #TRT模型
     
     def __init__(self, engine_path, input_names=None, output_names=None, final_shapes=None):
         
